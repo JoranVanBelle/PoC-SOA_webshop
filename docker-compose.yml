@@ -1,0 +1,77 @@
+version: '3.8'
+  
+services:
+  soa_webshop:
+    container_name: soa-webshop
+    build:
+      dockerfile: Dockerfile
+    image: soa-webshop:latest
+    restart: always
+    ports:
+      - 1083:1083
+    depends_on:
+      - inventory-soa
+      - transport-soa
+      - order-soa
+      - user-soa
+      - pricing-soa
+
+  inventory-soa:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: inventory
+      MYSQL_USER: user
+      MYSQL_PASSWORD: mysecretpassword
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+    volumes:
+      - ./data/inventory-soa:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+  transport-soa:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: transport
+      MYSQL_USER: user
+      MYSQL_PASSWORD: mysecretpassword
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+    volumes:
+      - ./data/transport-soa:/var/lib/mysql
+    ports:
+      - "3309:3306"
+
+  order-soa:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: order
+      MYSQL_USER: user
+      MYSQL_PASSWORD: mysecretpassword
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+    volumes:
+      - ./data/order-soa:/var/lib/mysql
+    ports:
+      - "3310:3306"
+
+  user-soa:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: users
+      MYSQL_USER: user
+      MYSQL_PASSWORD: mysecretpassword
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+    volumes:
+      - ./data/user-soa:/var/lib/mysql
+    ports:
+      - "3311:3306"
+
+  pricing-soa:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: pricing
+      MYSQL_USER: user
+      MYSQL_PASSWORD: mysecretpassword
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+    volumes:
+      - ./data/pricing-soa:/var/lib/mysql
+    ports:
+      - "3312:3306"

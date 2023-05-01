@@ -1,0 +1,36 @@
+server:
+  port: 1083
+
+spring:
+  application:
+    name: SOA webshop
+
+inventory:
+  datasource:
+    url: jdbc:mysql://inventory-soa:3306/inventory
+    password: mysecretpassword
+    username: user
+
+transport:
+  datasource:
+    url: jdbc:mysql://transport-soa:3306/transport
+    password: mysecretpassword
+    username: user
+
+order:
+  datasource:
+    url: jdbc:mysql://order-soa:3306/order
+    password: mysecretpassword
+    username: user
+
+user:
+  datasource:
+    url: jdbc:mysql://user-soa:3306/users
+    password: mysecretpassword
+    username: user
+
+pricing:
+  datasource:
+    url: jdbc:mysql://pricing-soa:3306/pricing
+    password: mysecretpassword
+    username: user
